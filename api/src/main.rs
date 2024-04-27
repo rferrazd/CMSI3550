@@ -9,7 +9,6 @@
 // Import libs
 use axum::{
     routing::{get,post},
-    response::IntoResponse,
     http::StatusCode,
     Json, Router,
 };
@@ -19,6 +18,7 @@ use serde::{Deserialize, Serialize}; // these have to be added to Cargo.toml
 #[tokio::main]
 async fn main() {
     // initialize tracing
+    println!("Hello, world!");
     tracing_subscriber::fmt::init(); // keep track of studd
 
     // build our application with a route
@@ -29,7 +29,6 @@ async fn main() {
         .route("/", get(root)) // passing the functions that will be used as action handler. Wrap those functions around HTTPS action
         // `POST /users` goes to `create_user`
         .route("/classes", get(get_classes)) // so that router knows what to do with an http request
-
         .route("/classes", post(create_class)); 
 
     // run our app with hyper, listening globally on port 3000
